@@ -110,9 +110,32 @@ $ npm run dev
 Access the API via post requests to the API endpoints. Here is a simple python example using the
 [requests library](https://requests.readthedocs.io/en/latest/):
 
+```py
+import requests
+
+
+endpoint = "city"
+data = {"location": "castelia-city"}
+r = requests.post(f"http://localhost:4978/{endpoint}", json=data)
+if r.status_code == 200:
+    response = r.json()
+    print(response)
+else:
+    print("Something went wrong:", r.reason)
+
+endpoint = "route"
+data = {"region": "hoenn", "routeNumber": 113}
+r = requests.post(f"http://localhost:4978/{endpoint}", json=data)
+if r.status_code == 200:
+    response = r.json()
+    print(response)
+else:
+    print("Something went wrong:", r.reason)
+```
+
 <details>
 
-<summary>...</summary>
+<summary>Full Example</summary>
 
 ```py
 import requests
