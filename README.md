@@ -190,3 +190,43 @@ test_post("route", data)
 ```
 
 </details>
+
+## UML Diagram
+
+Calling the `/city` endpoint.
+
+```mermaid
+sequenceDiagram
+    Client->>+PLP: "/city" {"location": "..."}
+    PLP->>+PokeAPI: P.getLocationByName(...)
+    PokeAPI->>-PLP: ['list','of','areas']
+    PLP->>+PokeAPI: P.getLocationAreaByName(...)
+    PokeAPI->>-PLP: ['list','of','pokemon']
+    PLP->>-Client: ['list','of','pokemon']
+```
+
+<details>
+
+<summary>image</summary>
+
+![City endpoint UML diagram](./city_uml.svg)
+
+</details>
+
+Calling the `/route` endpoint.
+
+```mermaid
+sequenceDiagram
+    Client->>+PLP: "/city" {"region": "...", "routeNumber": ...}
+    PLP->>+PokeAPI: P.getLocationAreaByName(...)
+    PokeAPI->>-PLP: ['list','of','pokemon']
+    PLP->>-Client: ['list','of','pokemon']
+```
+
+<details>
+
+<summary>image</summary>
+
+![Route endpoint UML diagram](./route_uml.svg)
+
+</details>
