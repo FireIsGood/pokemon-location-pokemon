@@ -1,5 +1,6 @@
 import { serve } from "@hono/node-server";
 import { Hono } from "hono";
+import { logger } from "hono/logger";
 import { z } from "zod";
 import { zValidator } from "@hono/zod-validator";
 
@@ -7,6 +8,8 @@ import Pokedex from "pokedex-promise-v2";
 const P = new Pokedex();
 
 const app = new Hono();
+
+app.use(logger());
 
 // Get a list of Pokemon from a location-area
 // returns undefined if the location-area is invalid
