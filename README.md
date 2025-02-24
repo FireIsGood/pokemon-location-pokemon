@@ -110,8 +110,60 @@ $ npm run dev
 Access the API via post requests to the API endpoints. Here is a simple python example using the
 [requests library](https://requests.readthedocs.io/en/latest/):
 
-**NOTE TO SELF** this is not done yet please update this later!
+<details>
+
+<summary>...</summary>
 
 ```py
 import requests
+
+
+def test_post(endpoint: str, data: dict):
+    print(f"POST: /{endpoint} and {data}")
+    r = requests.post(f"http://localhost:3000/{endpoint}", json=data)
+    if r.status_code == 200:
+        response = r.json()
+        print("->", r.status_code, response)
+    else:
+        print("->", r.status_code, r.reason)
+
+
+print("\n== Location endpoints! ==\n")
+
+# Correct call
+data = {"location": "castelia-city"}
+test_post("city", data)
+
+# Bad call: incorrect data format
+data = {"test": "uhh"}
+test_post("city", data)
+
+# Bad call: nonexistent location
+data = {"location": "testfalse"}
+test_post("city", data)
+
+
+print("\n== Region route endpoints! ==\n")
+
+# Correct call
+data = {"region": "kanto", "routeNumber": 1}
+test_post("route", data)
+
+# Another Correct call
+data = {"region": "hoenn", "routeNumber": 113}
+test_post("route", data)
+
+# Bad call: incorrect data format
+data = {"test": "uhh"}
+test_post("route", data)
+
+# Bad call: nonexistent region
+data = {"region": "thisregionisnotreal", "routeNumber": 1}
+test_post("route", data)
+
+# Bad call: nonexistent route
+data = {"region": "kanto", "routeNumber": 4000}
+test_post("route", data)
 ```
+
+</details>
