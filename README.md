@@ -120,7 +120,7 @@ import requests
 
 def test_post(endpoint: str, data: dict):
     print(f"POST: /{endpoint} and {data}")
-    r = requests.post(f"http://localhost:3000/{endpoint}", json=data)
+    r = requests.post(f"http://localhost:4978/{endpoint}", json=data)
     if r.status_code == 200:
         response = r.json()
         print("->", r.status_code, response)
